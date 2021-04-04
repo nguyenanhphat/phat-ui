@@ -1,0 +1,33 @@
+{
+  "name": "@phat/ui",
+  "version": "1.0.0",
+  "description": "Study StyleGuide",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "styleguidist server",
+    "docs:build": "styleguidist build"
+  },
+  "browser": {
+    "process.env.NODE_ENV": "a"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-styleguidist": "^11.1.5",
+    "webpack": "^5.24.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "process": "^0.11.10",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0"
+  }
+}
