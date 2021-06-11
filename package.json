@@ -1,6 +1,6 @@
 {
   "name": "@phat/ui",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "Study StyleGuide",
   "main": "index.js",
   "license": "MIT",
@@ -29,5 +29,9 @@
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nguyenanhphat/phat-ui.git"
   }
 }
