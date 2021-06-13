@@ -1,8 +1,8 @@
 const path = require("path");
-const outputDir = path.resolve(__dirname, "dist");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const outputDir = path.resolve(__dirname, "dist");
 const styleLoader = MiniCssExtractPlugin.loader;
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -15,6 +15,7 @@ const CSSModuleLoader = {
   },
 };
 module.exports = {
+  mode: "development",
   entry: {
     index: "./src/index.js",
   },
@@ -27,7 +28,9 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)?$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: {
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
@@ -52,9 +55,12 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      "@fundoo/ui": path.resolve(__dirname, "src/"),
+      "phat-test": path.resolve(__dirname, "src/"),
     },
     modules: ["node_modules", "src"],
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
+  devtool: "eval-source-map",
+  target: "web",
+  externals: ["react", "react-dom", "classnames", "prop-types"],
 };

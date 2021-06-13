@@ -26,7 +26,7 @@ module.exports = {
   serverPort: 8888,
   title: "Lib Component",
   moduleAliases: {
-    "@phat/ui/components": path.resolve(__dirname, "src/components"),
+    "phat-test/components": path.resolve(__dirname, "src/components"),
   },
   context: loadComponent(),
   getExampleFilename,
