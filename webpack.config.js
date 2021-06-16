@@ -3,7 +3,8 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
-const styleLoader = MiniCssExtractPlugin.loader;
+const styleLoader = "style-loader";
+// const styleLoader = MiniCssExtractPlugin.loader;
 const CSSModuleLoader = {
   loader: "css-loader",
   options: {
