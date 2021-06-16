@@ -1,6 +1,6 @@
 {
   "name": "phat-ui",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Study StyleGuide",
   "main": "dist/main.js",
   "license": "MIT",
