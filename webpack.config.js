@@ -15,6 +15,15 @@ const CSSModuleLoader = {
   },
 };
 
+const CSSLoader = {
+  loader: "css-loader",
+  options: {
+    modules: "global",
+    importLoaders: 2,
+    sourceMap: false, // turned off as causes delay
+  },
+};
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -31,6 +40,11 @@ module.exports = {
         use: {
           loader: "babel-loader",
         },
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /\.module\.(sa|sc|c)ss$/,
+        use: [styleLoader, CSSLoader, "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
