@@ -3,8 +3,9 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
-const devMode = process.env.NODE_ENV !== "production";
-const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
+// const devMode = process.env.NODE_ENV !== "production";
+// const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
+const styleLoader = "style-loader";
 
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -33,6 +34,7 @@ module.exports = {
     filename: "[name].js",
     library: "phat-ui",
     libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   module: {
     rules: [
@@ -63,8 +65,12 @@ module.exports = {
   },
   target: "web",
   plugins: [
-    new webpack.ProvidePlugin({
-      process: "process/browser",
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
