@@ -1,8 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const outputDir = path.resolve(__dirname, "dist");
+
 const styleLoader = MiniCssExtractPlugin.loader;
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -11,17 +11,15 @@ const CSSModuleLoader = {
       localIdentName: "[local]_[hash:base64:4]",
     },
     importLoaders: 2,
-    sourceMap: true, // turned off as causes delay
+    sourceMap: true,
   },
 };
+
 module.exports = {
-  mode: "development",
-  entry: {
-    index: "./src/index.js",
-  },
+  entry: "./src/index.js",
   output: {
-    filename: "[name].js",
     path: outputDir,
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -36,15 +34,16 @@ module.exports = {
         test: /\.module\.(sa|sc|c)ss$/,
         use: [styleLoader, CSSModuleLoader, "sass-loader"],
       },
-      {
-        test: /\.svg$/,
-        loader: "file-loader",
-        options: {
-          name: "static/media/[name].[hash:8].[ext]",
-        },
-      },
     ],
   },
+  resolve: {
+    alias: {
+      "phat-ui": path.resolve(__dirname, "src/"),
+    },
+    modules: ["node_modules", "src"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
+  target: "web",
   plugins: [
     new webpack.ProvidePlugin({
       process: "process/browser",
@@ -53,14 +52,4 @@ module.exports = {
       filename: "[name].css",
     }),
   ],
-  resolve: {
-    alias: {
-      "phat-test": path.resolve(__dirname, "src/"),
-    },
-    modules: ["node_modules", "src"],
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
-  },
-  devtool: "eval-source-map",
-  target: "web",
-  externals: ["react", "react-dom", "classnames", "prop-types"],
 };

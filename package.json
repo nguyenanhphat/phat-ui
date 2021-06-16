@@ -6,10 +6,12 @@
   "license": "MIT",
   "scripts": {
     "docs:dev": "styleguidist server",
-    "docs:build": "styleguidist build"
+    "docs:build": "styleguidist build",
+    "build": "npm run build:umd",
+    "build:umd": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "browser": {
-    "process.env.NODE_ENV": "a"
+    "process.env.NODE_ENV": "develop"
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -24,11 +26,12 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.0",
     "dotenv": "^8.2.0",
-    "mini-css-extract-plugin": "^1.4.0",
+    "mini-css-extract-plugin": "^1.6.0",
     "process": "^0.11.10",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
-    "style-loader": "^2.0.0"
+    "style-loader": "^2.0.0",
+    "webpack-cli": "^4.7.2"
   },
   "repository": {
     "type": "git",
