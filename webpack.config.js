@@ -47,11 +47,11 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSLoader, "postcss-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, CSSLoader, "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSModuleLoader, "postcss-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, CSSModuleLoader, "sass-loader"],
       },
     ],
   },
@@ -73,6 +73,11 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+      },
     }),
   ],
 };
