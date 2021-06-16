@@ -20,6 +20,8 @@ module.exports = {
   output: {
     path: outputDir,
     filename: "[name].js",
+    library: "phat-ui",
+    libraryTarget: "umd",
   },
   module: {
     rules: [
