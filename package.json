@@ -11,7 +11,7 @@
     "build:umd": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "browser": {
-    "process.env.NODE_ENV": "develop"
+    "process.env.NODE_ENV": "development"
   },
   "dependencies": {
     "react": "^17.0.2",

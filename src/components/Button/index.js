@@ -5,7 +5,7 @@ const Button = ({ children }) => {
   return (
     <>
       <button className={styles.root}>{children}</button>
-      New version
+      New version lastest
     </>
   );
 };
