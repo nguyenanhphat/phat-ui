@@ -1,12 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const outputDir = path.resolve(__dirname, "dist");
 
-const devMode = process.env.NODE_ENV !== "production";
-const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
+// const devMode = process.env.NODE_ENV !== "production";
+// const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
+const styleLoader = MiniCssExtractPlugin.loader;
 
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -47,13 +46,26 @@ module.exports = {
         },
       },
       {
+        test: /\.less$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSLoader, "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSModuleLoader, "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
@@ -75,9 +87,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
-    }),
-    new HtmlWebpackPlugin({
-      inject: true,
     }),
   ],
 };
