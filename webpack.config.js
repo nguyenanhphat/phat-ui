@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
 const devMode = process.env.NODE_ENV !== "production";
-const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
+const styleLoader = devMode ? MiniCssExtractPlugin.loader : "style-loader";
 
 const CSSModuleLoader = {
   loader: "css-loader",
