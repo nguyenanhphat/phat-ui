@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
 const devMode = process.env.NODE_ENV !== "production";
-const styleLoader = devMode ? MiniCssExtractPlugin.loader : "style-loader";
+const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
 
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -47,11 +47,11 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSLoader, "sass-loader"],
+        use: [styleLoader, CSSLoader, "postcss-loader", "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSModuleLoader, "sass-loader"],
+        use: [styleLoader, CSSModuleLoader, "postcss-loader", "sass-loader"],
       },
     ],
   },
