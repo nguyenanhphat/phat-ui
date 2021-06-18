@@ -1,11 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
-// const devMode = process.env.NODE_ENV !== "production";
-// const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
-const styleLoader = MiniCssExtractPlugin.loader;
+const devMode = process.env.NODE_ENV !== "production";
+const styleLoader = devMode ? "style-loader" : MiniCssExtractPlugin.loader;
 
 const CSSModuleLoader = {
   loader: "css-loader",
@@ -27,6 +27,25 @@ const CSSLoader = {
   },
 };
 
+const output = devMode
+  ? {}
+  : {
+      // required
+      globalObject: "(typeof self !== 'undefined' ? self : this)",
+    };
+
+const plugins = devMode
+  ? []
+  : [
+      new StaticSiteGeneratorPlugin({
+        crawl: true,
+        path: ["/"],
+        globals: {
+          window: {},
+        },
+      }),
+    ];
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -35,6 +54,7 @@ module.exports = {
     library: "phat-ui",
     libraryTarget: "umd",
     umdNamedDefine: true,
+    ...output,
   },
   module: {
     rules: [
@@ -48,7 +68,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          styleLoader,
           "css-loader",
           {
             loader: "less-loader",
@@ -61,11 +81,11 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [styleLoader, CSSLoader, "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [styleLoader, CSSModuleLoader, "sass-loader"],
       },
     ],
   },
@@ -88,5 +108,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
+    ...plugins,
   ],
 };
