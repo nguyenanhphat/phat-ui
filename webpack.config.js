@@ -27,6 +27,10 @@ const CSSLoader = {
   },
 };
 
+const PostCSSLoader = {
+  loader: "postcss-loader",
+};
+
 const output = devMode
   ? {}
   : {
@@ -81,11 +85,11 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSLoader, "sass-loader"],
+        use: [styleLoader, CSSLoader, PostCSSLoader, "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSModuleLoader, "sass-loader"],
+        use: [styleLoader, CSSModuleLoader, PostCSSLoader, "sass-loader"],
       },
     ],
   },
