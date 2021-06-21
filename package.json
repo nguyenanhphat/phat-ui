@@ -47,6 +47,7 @@
     "url": "https://github.com/nguyenanhphat/phat-ui.git"
   },
   "sideEffects": [
-    "*.scss"
+    "**/*.css",
+    "**/*.scss"
   ]
 }
