@@ -41,7 +41,6 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: outputDir,
-    publicPath: "/",
     filename: "[name].js",
     library: "phat-ui",
     libraryTarget: "umd",
@@ -83,9 +82,6 @@ module.exports = {
         use: [
           {
             loader: "file-loader",
-            // options: {
-            //   outputPath: "images",
-            // },
           },
         ],
       },

@@ -10,7 +10,8 @@
   "scripts": {
     "docs:dev": "styleguidist server",
     "docs:build": "styleguidist build",
-    "build": "npm run build:umd",
+    "build": "npm run build:clean && npm run build:umd",
+    "build:clean": "rimraf dist",
     "build:umd": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "dependencies": {
