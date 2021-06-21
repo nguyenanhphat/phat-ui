@@ -41,6 +41,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: outputDir,
+    publicPath: "/",
     filename: "[name].js",
     library: "phat-ui",
     libraryTarget: "umd",
