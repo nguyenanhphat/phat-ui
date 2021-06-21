@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import imgWebpack from "./default.png";
-export const Image = () => {
+
+const Image = () => {
   const createImgElement = () => {
     const imgElement = document.createElement("img");
     imgElement.src = imgWebpack;
@@ -18,3 +19,5 @@ export const Image = () => {
     </div>
   );
 };
+
+export default Image;
