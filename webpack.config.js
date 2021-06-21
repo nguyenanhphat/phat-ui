@@ -71,40 +71,46 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: styleLoader,
-            options: {
-              publicPath: "../",
-            },
-          },
-          CSSLoader,
-          PostCSSLoader,
-          "sass-loader",
-        ],
+        use: [styleLoader, CSSLoader, PostCSSLoader, "sass-loader"],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: styleLoader,
-            options: {
-              publicPath: "../",
-            },
-          },
-          CSSModuleLoader,
-          PostCSSLoader,
-          "sass-loader",
-        ],
+        use: [styleLoader, CSSModuleLoader, PostCSSLoader, "sass-loader"],
       },
       {
-        test: /\.(eot|otf|ttf|woff|woff2|png)$/,
+        test: /\.(eot|otf|ttf|woff|woff2)$/,
+        use: "file-loader",
+      },
+      {
+        test: /\.(jpe?g|gif|png|svg)$/i,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader",
             options: {
-              publicPath: "/assets/img/",
-              outputPath: "assets/img/",
+              // inline files smaller than 10 kB
+              limit: 10 * 1024,
+            },
+          },
+          {
+            loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                enabled: false,
+                // NOTE: mozjpeg is disabled as it causes errors in some Linux environments
+                // Try enabling it in your environment by switching the config to:
+                // enabled: true,
+                // progressive: true,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              optipng: {
+                optimizationLevel: 7,
+              },
+              pngquant: {
+                // quality: '65-90',
+                speed: 4,
+              },
             },
           },
         ],
