@@ -110,4 +110,5 @@ module.exports = {
       filename: "[name].css",
     }),
   ],
+  externals: ["react", "react-dom", "classnames", "prop-types"],
 };
