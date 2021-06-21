@@ -82,6 +82,10 @@ module.exports = {
         use: [
           {
             loader: "file-loader",
+            options: {
+              publicPath: "assets/img/",
+              outputPath: "assets/img/",
+            },
           },
         ],
       },
@@ -112,4 +116,8 @@ module.exports = {
     }),
   ],
   externals: ["react", "react-dom", "classnames", "prop-types"],
+  performance: {
+    assetFilter: (assetFilename) =>
+      !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
+  },
 };
