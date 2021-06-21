@@ -1,6 +1,6 @@
 {
   "name": "phat-ui",
-  "version": "1.1.39",
+  "version": "1.1.40",
   "description": "Study StyleGuide",
   "main": "dist/main.js",
   "files": [
