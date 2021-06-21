@@ -5,7 +5,6 @@ const Button = ({ children }) => {
   return (
     <>
       <button className={styles.root}>{children}</button>
-      Build new nhat 22222
     </>
   );
 };

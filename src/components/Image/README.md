@@ -1,0 +1,5 @@
+Basic image:
+
+```jsx
+<Image />
+```

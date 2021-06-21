@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
 const outputDir = path.resolve(__dirname, "dist");
 
 const devMode = process.env.NODE_ENV !== "production";
@@ -38,27 +37,15 @@ const output = devMode
       globalObject: "(typeof self !== 'undefined' ? self : this)",
     };
 
-const plugins = devMode
-  ? []
-  : [
-      new StaticSiteGeneratorPlugin({
-        crawl: true,
-        path: ["/"],
-        globals: {
-          window: {},
-        },
-      }),
-    ];
-
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: outputDir,
+    publicPath: "/",
     filename: "[name].js",
     library: "phat-ui",
     libraryTarget: "umd",
     umdNamedDefine: true,
-    ...output,
   },
   module: {
     rules: [
@@ -91,6 +78,17 @@ module.exports = {
         test: /\.module\.(sa|sc|c)ss$/,
         use: [styleLoader, CSSModuleLoader, PostCSSLoader, "sass-loader"],
       },
+      {
+        test: /\.(eot|otf|ttf|woff|woff2|png)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "images",
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -102,7 +100,6 @@ module.exports = {
   },
   target: "web",
   plugins: [
-    new webpack.EnvironmentPlugin(["NODE_ENV"]),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
       "process.env": {
@@ -112,6 +109,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
-    ...plugins,
   ],
 };
