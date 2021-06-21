@@ -58,7 +58,12 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          styleLoader,
+          {
+            loader: styleLoader,
+            options: {
+              publicPath: "../",
+            },
+          },
           "css-loader",
           {
             loader: "less-loader",
@@ -71,11 +76,31 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSLoader, PostCSSLoader, "sass-loader"],
+        use: [
+          {
+            loader: styleLoader,
+            options: {
+              publicPath: "../",
+            },
+          },
+          CSSLoader,
+          PostCSSLoader,
+          "sass-loader",
+        ],
       },
       {
         test: /\.module\.(sa|sc|c)ss$/,
-        use: [styleLoader, CSSModuleLoader, PostCSSLoader, "sass-loader"],
+        use: [
+          {
+            loader: styleLoader,
+            options: {
+              publicPath: "../",
+            },
+          },
+          CSSModuleLoader,
+          PostCSSLoader,
+          "sass-loader",
+        ],
       },
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
