@@ -60,9 +60,6 @@ module.exports = {
         use: [
           {
             loader: styleLoader,
-            options: {
-              publicPath: "../",
-            },
           },
           "css-loader",
           {
@@ -79,9 +76,6 @@ module.exports = {
         use: [
           {
             loader: styleLoader,
-            options: {
-              publicPath: "../",
-            },
           },
           CSSLoader,
           PostCSSLoader,
@@ -93,9 +87,6 @@ module.exports = {
         use: [
           {
             loader: styleLoader,
-            options: {
-              publicPath: "../",
-            },
           },
           CSSModuleLoader,
           PostCSSLoader,
