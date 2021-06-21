@@ -105,6 +105,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+      },
+    }),
   ],
   externals: ["react", "react-dom", "classnames", "prop-types"],
 };
