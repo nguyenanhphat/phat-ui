@@ -30,13 +30,6 @@ const PostCSSLoader = {
   loader: "postcss-loader",
 };
 
-const output = devMode
-  ? {}
-  : {
-      // required
-      globalObject: "(typeof self !== 'undefined' ? self : this)",
-    };
-
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -45,7 +38,6 @@ module.exports = {
     library: "phat-ui",
     libraryTarget: "umd",
     umdNamedDefine: true,
-    publicPath: "dist/",
   },
   module: {
     rules: [
@@ -88,7 +80,6 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              // inline files smaller than 10 kB
               limit: 10 * 1024,
             },
           },
@@ -143,8 +134,4 @@ module.exports = {
     }),
   ],
   externals: ["react", "react-dom", "classnames", "prop-types"],
-  performance: {
-    assetFilter: (assetFilename) =>
-      !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
-  },
 };

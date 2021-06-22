@@ -15,7 +15,7 @@ const Image = () => {
 
   return (
     <div id="root">
-      <div>Image</div>
+      <div>Image new</div>
     </div>
   );
 };
