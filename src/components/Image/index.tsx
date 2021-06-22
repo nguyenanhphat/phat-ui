@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import imgWebpack from "./default.png";
+import imgWebpack from "./default.jpeg";
 
 const Image = () => {
   const createImgElement = () => {
