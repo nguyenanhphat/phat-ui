@@ -45,6 +45,7 @@ module.exports = {
     library: "phat-ui",
     libraryTarget: "umd",
     umdNamedDefine: true,
+    publicPath: "dist/",
   },
   module: {
     rules: [
